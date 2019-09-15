@@ -1,0 +1,126 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Controlers and Workers
+
+Metadata: 
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: Some Params
+        Parameters:
+          - SubnetAZ1
+          - SubnetAZ2
+          - SubnetAZ3
+          - KeyName
+
+Parameters:
+  SubnetAZ1:
+    Type: String
+  
+  SubnetAZ2:
+    Type: String
+
+  SubnetAZ3:
+    Type: String
+
+  KeyName:
+    Type: String
+
+
+Resources:
+  Controller1:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KeyName
+      InstanceType: t3a.medium
+      ImageId: ami-06358f49b5839867c
+      SubnetId: !Ref SubnetAZ1
+      PrivateIpAddress: 10.17.243.100
+      BlockDeviceMappings:
+      - DeviceName: /dev/sda1
+        Ebs:
+          VolumeSize: 200
+      Tags:
+      - Key: Name
+        Value: controller1
+
+  Controller2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KeyName
+      InstanceType: t3a.medium
+      ImageId: ami-06358f49b5839867c
+      SubnetId: !Ref SubnetAZ2
+      PrivateIpAddress: 10.17.244.100
+      BlockDeviceMappings:
+      - DeviceName: /dev/sda1
+        Ebs:
+          VolumeSize: 200
+      Tags:
+      - Key: Name
+        Value: controller2
+
+  Controller3:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KeyName
+      InstanceType: t3a.medium
+      ImageId: ami-06358f49b5839867c
+      SubnetId: !Ref SubnetAZ3
+      PrivateIpAddress: 10.17.245.100
+      BlockDeviceMappings:
+      - DeviceName: /dev/sda1
+        Ebs:
+          VolumeSize: 200
+      Tags:
+      - Key: Name
+        Value: controller3
+
+  Worker1:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KeyName
+      InstanceType: t3a.medium
+      ImageId: ami-06358f49b5839867c
+      SubnetId: !Ref SubnetAZ1
+      PrivateIpAddress: 10.17.243.200
+      BlockDeviceMappings:
+      - DeviceName: /dev/sda1
+        Ebs:
+          VolumeSize: 200
+      Tags:
+      - Key: Name
+        Value: worker1
+
+  Worker2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KeyName
+      InstanceType: t3a.medium
+      ImageId: ami-06358f49b5839867c
+      SubnetId: !Ref SubnetAZ2
+      PrivateIpAddress: 10.17.244.200
+      BlockDeviceMappings:
+      - DeviceName: /dev/sda1
+        Ebs:
+          VolumeSize: 200
+      Tags:
+      - Key: Name
+        Value: worker2
+
+  Worker3:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KeyName
+      InstanceType: t3a.medium
+      ImageId: ami-06358f49b5839867c
+      SubnetId: !Ref SubnetAZ3
+      PrivateIpAddress: 10.17.245.200
+      BlockDeviceMappings:
+      - DeviceName: /dev/sda1
+        Ebs:
+          VolumeSize: 200
+      Tags:
+      - Key: Name
+        Value: worker3
