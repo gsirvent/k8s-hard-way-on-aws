@@ -3,21 +3,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: >
   Controlers and Workers
 
-Metadata: 
-  AWS::CloudFormation::Interface:
-    ParameterGroups:
-      - Label:
-          default: Some Params
-        Parameters:
-          - SubnetAZ1
-          - SubnetAZ2
-          - SubnetAZ3
-          - KeyName
-
 Parameters:
   SubnetAZ1:
     Type: String
-  
+
   SubnetAZ2:
     Type: String
 
