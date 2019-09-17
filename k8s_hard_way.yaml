@@ -18,14 +18,16 @@ Parameters:
 
 
 Resources:
+
   Controller1:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: !Ref KeyName
       InstanceType: t3a.medium
       ImageId: ami-06358f49b5839867c
-      SubnetId: !Ref SubnetAZ1
-      PrivateIpAddress: 10.17.243.100
+      NetworkInterfaces:
+      - NetworkInterfaceId: !Ref ENIController1
+        DeviceIndex: '0'
       BlockDeviceMappings:
       - DeviceName: /dev/sda1
         Ebs:
@@ -34,14 +36,23 @@ Resources:
       - Key: Name
         Value: controller1
 
+  ENIController1:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+      Description: ENI for Controller 1
+      PrivateIpAddress: 10.17.243.100
+      SourceDestCheck: True
+      SubnetId: !Ref SubnetAZ1
+
   Controller2:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: !Ref KeyName
       InstanceType: t3a.medium
       ImageId: ami-06358f49b5839867c
-      SubnetId: !Ref SubnetAZ2
-      PrivateIpAddress: 10.17.244.100
+      NetworkInterfaces:
+      - NetworkInterfaceId: !Ref ENIController2
+        DeviceIndex: '0'
       BlockDeviceMappings:
       - DeviceName: /dev/sda1
         Ebs:
@@ -50,14 +61,23 @@ Resources:
       - Key: Name
         Value: controller2
 
+  ENIController2:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+      Description: ENI for Controller 2
+      PrivateIpAddress: 10.17.244.100
+      SourceDestCheck: True
+      SubnetId: !Ref SubnetAZ2
+
   Controller3:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: !Ref KeyName
       InstanceType: t3a.medium
       ImageId: ami-06358f49b5839867c
-      SubnetId: !Ref SubnetAZ3
-      PrivateIpAddress: 10.17.245.100
+      NetworkInterfaces:
+      - NetworkInterfaceId: !Ref ENIController3
+        DeviceIndex: '0'
       BlockDeviceMappings:
       - DeviceName: /dev/sda1
         Ebs:
@@ -66,14 +86,23 @@ Resources:
       - Key: Name
         Value: controller3
 
+  ENIController3:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+      Description: ENI for Controller 3
+      PrivateIpAddress: 10.17.245.100
+      SourceDestCheck: True
+      SubnetId: !Ref SubnetAZ3
+
   Worker1:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: !Ref KeyName
       InstanceType: t3a.medium
       ImageId: ami-06358f49b5839867c
-      SubnetId: !Ref SubnetAZ1
-      PrivateIpAddress: 10.17.243.200
+      NetworkInterfaces:
+      - NetworkInterfaceId: !Ref ENIWorker1
+        DeviceIndex: '0'
       BlockDeviceMappings:
       - DeviceName: /dev/sda1
         Ebs:
@@ -82,14 +111,23 @@ Resources:
       - Key: Name
         Value: worker1
 
+  ENIWorker1:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+      Description: ENI for Worker 1
+      PrivateIpAddress: 10.17.243.200
+      SourceDestCheck: True
+      SubnetId: !Ref SubnetAZ1
+
   Worker2:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: !Ref KeyName
       InstanceType: t3a.medium
       ImageId: ami-06358f49b5839867c
-      SubnetId: !Ref SubnetAZ2
-      PrivateIpAddress: 10.17.244.200
+      NetworkInterfaces:
+      - NetworkInterfaceId: !Ref ENIWorker2
+        DeviceIndex: '0'
       BlockDeviceMappings:
       - DeviceName: /dev/sda1
         Ebs:
@@ -98,14 +136,23 @@ Resources:
       - Key: Name
         Value: worker2
 
+  ENIWorker2:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+      Description: ENI for Worker 2
+      PrivateIpAddress: 10.17.244.200
+      SourceDestCheck: True
+      SubnetId: !Ref SubnetAZ2
+
   Worker3:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: !Ref KeyName
       InstanceType: t3a.medium
       ImageId: ami-06358f49b5839867c
-      SubnetId: !Ref SubnetAZ3
-      PrivateIpAddress: 10.17.245.200
+      NetworkInterfaces:
+      - NetworkInterfaceId: !Ref ENIWorker3
+        DeviceIndex: '0'
       BlockDeviceMappings:
       - DeviceName: /dev/sda1
         Ebs:
@@ -113,3 +160,11 @@ Resources:
       Tags:
       - Key: Name
         Value: worker3
+
+  ENIWorker3:
+    Type: AWS::EC2::NetworkInterface
+    Properties:
+      Description: ENI for Worker 3
+      PrivateIpAddress: 10.17.245.200
+      SourceDestCheck: True
+      SubnetId: !Ref SubnetAZ3

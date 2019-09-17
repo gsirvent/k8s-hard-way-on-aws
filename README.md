@@ -1,8 +1,9 @@
 # k8s-hard-way-on-aws
 
 
-- AWS deploy CF template for controllers and workers
+## AWS deploy CF template for controllers and workers
 
+```
 aws cloudformation create-stack \
   --stack-name $NAME \
   --template-body file://k8s_hard_way.yaml \
@@ -12,3 +13,4 @@ aws cloudformation create-stack \
     ParameterKey=SubnetAZ3,ParameterValue=$AZ3 \
     ParameterKey=KeyName,ParameterValue=$KN \
   --profile $PRFL
+```
